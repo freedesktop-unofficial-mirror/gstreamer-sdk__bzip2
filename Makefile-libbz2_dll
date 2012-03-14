@@ -35,7 +35,7 @@ OBJS= blocksort.o  \
       bzlib.o
 
 all: $(OBJS)
-	$(CC) -shared -no-undefined -o libbz2.dll $(OBJS)
+	$(CC) -shared -o libbz2.dll $(OBJS)
 
 clean: 
 	rm -f $(OBJS) libbz2.dll
