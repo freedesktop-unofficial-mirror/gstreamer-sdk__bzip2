@@ -15,9 +15,15 @@
 SHELL=/bin/sh
 
 # To assist in cross-compiling
-CC=gcc
-AR=ar
-RANLIB=ranlib
+ifndef CC
+  CC=gcc
+endif
+ifndef RANLIB
+  RANLIB=ranlib
+endif
+ifndef AR
+  AR=ar
+endif
 LDFLAGS=
 
 BIGFILES=-D_FILE_OFFSET_BITS=64

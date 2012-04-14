@@ -22,7 +22,6 @@
 
 
 SHELL=/bin/sh
-CC=gcc
 BIGFILES=-D_FILE_OFFSET_BITS=64
 CFLAGS=-fpic -fPIC -Wall -Winline -O2 -g $(BIGFILES)
 
