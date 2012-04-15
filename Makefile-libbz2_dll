@@ -40,7 +40,7 @@ clean:
 	rm -f $(OBJS) libbz2.dll
 
 install:
-	cp -f libbz2.dll $(PREFIX)/lib
+	cp -f libbz2.dll $(PREFIX)/bin
 
 blocksort.o: blocksort.c
 	$(CC) $(CFLAGS) -c blocksort.c
