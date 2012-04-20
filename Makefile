@@ -81,14 +81,14 @@ install: bzip2 bzip2recover
 	if ( test ! -d $(PREFIX)/man ) ; then mkdir -p $(PREFIX)/man ; fi
 	if ( test ! -d $(PREFIX)/man/man1 ) ; then mkdir -p $(PREFIX)/man/man1 ; fi
 	if ( test ! -d $(PREFIX)/include ) ; then mkdir -p $(PREFIX)/include ; fi
-	cp -f bzip2 $(PREFIX)/bin/bzip2
-	cp -f bzip2 $(PREFIX)/bin/bunzip2
-	cp -f bzip2 $(PREFIX)/bin/bzcat
-	cp -f bzip2recover $(PREFIX)/bin/bzip2recover
-	chmod a+x $(PREFIX)/bin/bzip2
-	chmod a+x $(PREFIX)/bin/bunzip2
-	chmod a+x $(PREFIX)/bin/bzcat
-	chmod a+x $(PREFIX)/bin/bzip2recover
+	cp -f bzip2$(EXT) $(PREFIX)/bin/bzip2$(EXT)
+	cp -f bzip2$(EXT) $(PREFIX)/bin/bunzip2$(EXT)
+	cp -f bzip2$(EXT) $(PREFIX)/bin/bzcat$(EXT)
+	cp -f bzip2recover$(EXT) $(PREFIX)/bin/bzip2recover$(EXT)
+	chmod a+x $(PREFIX)/bin/bzip2$(EXT)
+	chmod a+x $(PREFIX)/bin/bunzip2$(EXT)
+	chmod a+x $(PREFIX)/bin/bzcat$(EXT)
+	chmod a+x $(PREFIX)/bin/bzip2recover$(EXT)
 	cp -f bzip2.1 $(PREFIX)/man/man1
 	chmod a+r $(PREFIX)/man/man1/bzip2.1
 	cp -f bzlib.h $(PREFIX)/include
