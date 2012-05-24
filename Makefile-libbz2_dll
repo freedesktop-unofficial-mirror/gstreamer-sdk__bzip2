@@ -23,7 +23,16 @@
 
 SHELL=/bin/sh
 BIGFILES=-D_FILE_OFFSET_BITS=64
-CFLAGS=-fpic -fPIC -Wall -Winline -O2 -g $(BIGFILES)
+BZIP2_CFLAGS=-fpic -fPIC -Wall -Winline -O2 -g $(BIGFILES)
+BZIP2_LDFLAGS=
+
+ifdef CFLAGS
+BZIP2_CFLAGS+=$(CFLAGS)
+endif
+
+ifdef LDFLAGS
+BZIP2_LDFLAGS+=$(LDFLAGS)
+endif
 
 OBJS= blocksort.o  \
       huffman.o    \
@@ -34,7 +43,7 @@ OBJS= blocksort.o  \
       bzlib.o
 
 all: $(OBJS)
-	$(CC) -shared -o libbz2.dll $(OBJS)
+	$(CC) $(BZIP2_LDFLAGS) -shared -o libbz2.dll $(OBJS)
 
 clean: 
 	rm -f $(OBJS) libbz2.dll
@@ -43,16 +52,16 @@ install:
 	cp -f libbz2.dll $(PREFIX)/bin
 
 blocksort.o: blocksort.c
-	$(CC) $(CFLAGS) -c blocksort.c
+	$(CC) $(BZIP2_CFLAGS) -c blocksort.c
 huffman.o: huffman.c
-	$(CC) $(CFLAGS) -c huffman.c
+	$(CC) $(BZIP2_CFLAGS) -c huffman.c
 crctable.o: crctable.c
-	$(CC) $(CFLAGS) -c crctable.c
+	$(CC) $(BZIP2_CFLAGS) -c crctable.c
 randtable.o: randtable.c
-	$(CC) $(CFLAGS) -c randtable.c
+	$(CC) $(BZIP2_CFLAGS) -c randtable.c
 compress.o: compress.c
-	$(CC) $(CFLAGS) -c compress.c
+	$(CC) $(BZIP2_CFLAGS) -c compress.c
 decompress.o: decompress.c
-	$(CC) $(CFLAGS) -c decompress.c
+	$(CC) $(BZIP2_CFLAGS) -c decompress.c
 bzlib.o: bzlib.c
-	$(CC) $(CFLAGS) -c bzlib.c
+	$(CC) $(BZIP2_CFLAGS) -c bzlib.c

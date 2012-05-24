@@ -24,10 +24,18 @@ endif
 ifndef AR
   AR=ar
 endif
-LDFLAGS=
+BZIP2_LDFLAGS=
 
 BIGFILES=-D_FILE_OFFSET_BITS=64
-CFLAGS=-Wall -Winline -O2 -g $(BIGFILES)
+BZIP2_CFLAGS=-Wall -Winline -O2 -g $(BIGFILES)
+
+ifdef CFLAGS
+BZIP2_CFLAGS+=$(CFLAGS)
+endif
+
+ifdef LDFLAGS
+BZIP2_LDFLAGS+=$(LDFLAGS)
+endif
 
 # Where you want it installed when you do 'make install'
 PREFIX=/usr/local
@@ -44,10 +52,10 @@ OBJS= blocksort.o  \
 all: libbz2.a bzip2 bzip2recover
 
 bzip2: libbz2.a bzip2.o
-	$(CC) $(CFLAGS) $(LDFLAGS) -o bzip2$(EXT) bzip2.o -L. -lbz2
+	$(CC) $(BZIP2_CFLAGS) $(BZIP2_LDFLAGS) -o bzip2$(EXT) bzip2.o -L. -lbz2
 
 bzip2recover: bzip2recover.o
-	$(CC) $(CFLAGS) $(LDFLAGS) -o bzip2recover$(EXT) bzip2recover.o
+	$(CC) $(BZIP2_CFLAGS) $(BZIP2_LDFLAGS) -o bzip2recover$(EXT) bzip2recover.o
 
 libbz2.a: $(OBJS)
 	rm -f libbz2.a
@@ -121,23 +129,23 @@ clean:
 
 blocksort.o: blocksort.c
 	@cat words0
-	$(CC) $(CFLAGS) -c blocksort.c
+	$(CC) $(BZIP2_CFLAGS) -c blocksort.c
 huffman.o: huffman.c
-	$(CC) $(CFLAGS) -c huffman.c
+	$(CC) $(BZIP2_CFLAGS) -c huffman.c
 crctable.o: crctable.c
-	$(CC) $(CFLAGS) -c crctable.c
+	$(CC) $(BZIP2_CFLAGS) -c crctable.c
 randtable.o: randtable.c
-	$(CC) $(CFLAGS) -c randtable.c
+	$(CC) $(BZIP2_CFLAGS) -c randtable.c
 compress.o: compress.c
-	$(CC) $(CFLAGS) -c compress.c
+	$(CC) $(BZIP2_CFLAGS) -c compress.c
 decompress.o: decompress.c
-	$(CC) $(CFLAGS) -c decompress.c
+	$(CC) $(BZIP2_CFLAGS) -c decompress.c
 bzlib.o: bzlib.c
-	$(CC) $(CFLAGS) -c bzlib.c
+	$(CC) $(BZIP2_CFLAGS) -c bzlib.c
 bzip2.o: bzip2.c
-	$(CC) $(CFLAGS) -c bzip2.c
+	$(CC) $(BZIP2_CFLAGS) -c bzip2.c
 bzip2recover.o: bzip2recover.c
-	$(CC) $(CFLAGS) -c bzip2recover.c
+	$(CC) $(BZIP2_CFLAGS) -c bzip2recover.c
 
 
 distclean: clean
