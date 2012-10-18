@@ -43,13 +43,14 @@ OBJS= blocksort.o  \
       bzlib.o
 
 all: $(OBJS)
-	$(CC) $(BZIP2_LDFLAGS) -shared -o libbz2.dll $(OBJS)
+	$(CC) $(BZIP2_LDFLAGS) -shared -o libbz2.dll -Wl,--out-implib,libbz2.dll.a $(OBJS)
 
 clean: 
 	rm -f $(OBJS) libbz2.dll
 
 install:
 	cp -f libbz2.dll $(PREFIX)/bin
+	cp -f libbz2.dll.a $(PREFIX)/lib
 
 blocksort.o: blocksort.c
 	$(CC) $(BZIP2_CFLAGS) -c blocksort.c
