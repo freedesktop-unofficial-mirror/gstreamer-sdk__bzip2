@@ -22,7 +22,9 @@
 
 
 SHELL=/bin/sh
+ifndef CC
 CC=gcc
+endif
 BIGFILES=-D_FILE_OFFSET_BITS=64
 BZIP2_CFLAGS=-fpic -fPIC -Wall -Winline -O2 -g $(BIGFILES)
 BZIP2_LDFLAGS=
