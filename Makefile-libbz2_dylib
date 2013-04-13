@@ -46,13 +46,21 @@ OBJS= blocksort.o  \
       bzlib.o
 
 all: $(OBJS)
-	$(CC) -shared -o libbz2.dylib $(OBJS) $(BZIP2_LDFLAGS)
+	$(CC) $(BZIP2_LDFLAGS) -shared -Wl,-install_name -Wl,libbz2.1.0.dylib -o libbz2.1.0.6.dylib $(OBJS)
+	rm -f libbz2.1.0.dylib
+	rm -f libbz2.dylib
+	ln -s libbz2.1.0.6.dylib libbz2.1.0.dylib
+	ln -s libbz2.1.0.6.dylib libbz2.dylib
 
 clean: 
-	rm -f $(OBJS) libbz2.dylib
+	rm -f $(OBJS) libbz2.1.0.6.dylib libbz2.1.0.dylib libbz2.dylib
 
 install:
-	cp -f libbz2.dylib $(PREFIX)/lib
+	cp -f libbz2.1.0.6.dylib $(PREFIX)/lib
+	rm -f $(PREFIX)/lib/libbz2.1.0.dylib
+	rm -f $(PREFIX)/lib/libbz2.dylib
+	ln -s $(PREFIX)/lib/libbz2.1.0.6.dylib $(PREFIX)/lib/libbz2.1.0.dylib
+	ln -s $(PREFIX)/lib/libbz2.1.0.6.dylib $(PREFIX)/lib/libbz2.dylib
 
 blocksort.o: blocksort.c
 	$(CC) $(BZIP2_CFLAGS) -c blocksort.c
