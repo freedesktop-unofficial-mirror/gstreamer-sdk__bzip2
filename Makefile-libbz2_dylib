@@ -59,8 +59,8 @@ install:
 	cp -f libbz2.1.0.6.dylib $(PREFIX)/lib
 	rm -f $(PREFIX)/lib/libbz2.1.0.dylib
 	rm -f $(PREFIX)/lib/libbz2.dylib
-	ln -s $(PREFIX)/lib/libbz2.1.0.6.dylib $(PREFIX)/lib/libbz2.1.0.dylib
-	ln -s $(PREFIX)/lib/libbz2.1.0.6.dylib $(PREFIX)/lib/libbz2.dylib
+	cp -R libbz2.1.0.dylib $(PREFIX)/lib/
+	cp -R libbz2.dylib $(PREFIX)/lib/
 
 blocksort.o: blocksort.c
 	$(CC) $(BZIP2_CFLAGS) -c blocksort.c
